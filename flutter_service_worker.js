@@ -46,12 +46,12 @@ const RESOURCES = {"account-tree.svg": "d41d8cd98f00b204e9800998ecf8427e",
 "icons/Icon-512.png": "d41d8cd98f00b204e9800998ecf8427e",
 "icons/Icon-maskable-192.png": "d41d8cd98f00b204e9800998ecf8427e",
 "icons/Icon-maskable-512.png": "d41d8cd98f00b204e9800998ecf8427e",
-"index.html": "f72b33f91958d4fd0c64824c5cbd5368",
-"/": "f72b33f91958d4fd0c64824c5cbd5368",
+"index.html": "9754b10f1281f68f516fbf57f8d1f6ee",
+"/": "9754b10f1281f68f516fbf57f8d1f6ee",
 "main.dart": "45b33eafd7b00c87111ba7028d052b4c",
-"main.dart.js": "13fe04eb03ac062bdb07bf5fd8da7f50",
+"main.dart.js": "d5f5eea0482c27cadbb6cb0ce0340c15",
 "manifest.json": "d41d8cd98f00b204e9800998ecf8427e",
-"paystack_interop.js": "d41d8cd98f00b204e9800998ecf8427e",
+"paystack_interop.js": "0f12d02f35009f57bc1672f66849e128",
 "version.json": "d66cac2d06ac0ec2c0d30ceaa48c20b9"};
 // The application shell files that are downloaded before a service worker can
 // start.
