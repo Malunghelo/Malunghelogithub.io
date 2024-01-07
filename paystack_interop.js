@@ -11,7 +11,7 @@ function paystackPopUp(
   let handler = PaystackPop.setup({
     key: publicKey,
     email: email,
-    amount: amount * 100,
+    amount: amount,
     ref: ref,
     currency: currency,
     onClose: function () {
