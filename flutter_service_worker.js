@@ -3,14 +3,15 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "ddfcba3cc500785c471fb8c6a22a9eb1",
-"assets/AssetManifest.bin.json": "5beb485d3e5036c7fc9333c3ac25b297",
-"assets/AssetManifest.json": "a366750b22964fb11a844e7b3979e818",
+const RESOURCES = {"assets/AssetManifest.bin": "d2fa1585221859d073b1a3ccf21fd778",
+"assets/AssetManifest.bin.json": "339775e53054e1cea36d9b07e14c98b6",
+"assets/AssetManifest.json": "68f1d83b73e380443b1a20e549225cac",
+"assets/assets/icons/baim.jpg": "5b9cc4882fed6ab9e063d4815c33e2e1",
 "assets/assets/icons/portal.png": "c0d13f207b229a56fff33741dda7ea37",
 "assets/assets/icons/student.png": "b5e9e9a239ebc316395e9c6e7f17ba5b",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
 "assets/fonts/MaterialIcons-Regular.otf": "50a32a3573b6050cc405d43b6fad9df5",
-"assets/NOTICES": "156220dbfd329f0f9c1730ed513c379e",
+"assets/NOTICES": "cdaba353e9d35dc3e5e259146befb9be",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "89ed8f4e49bcdfc0b5bfc9b24591e347",
 "assets/packages/flutter_paystack/assets/images/american_express.png": "fac1ed63030230003fa52ee8f98aa8dc",
 "assets/packages/flutter_paystack/assets/images/dinners_club.png": "24450426cbb1e5b657356b6cca621956",
@@ -38,9 +39,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "ddfcba3cc500785c471fb8c6a22a9eb1
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "cb97fc5307e7b6fc9498758fc91b4dfd",
-"/": "cb97fc5307e7b6fc9498758fc91b4dfd",
-"main.dart.js": "7821315d18e89415efd0cf10c519793b",
+"index.html": "f11dd7e4d855132046fcf5221c8bdbf8",
+"/": "f11dd7e4d855132046fcf5221c8bdbf8",
+"main.dart.js": "67d2604386e3a31a09971fee2a8aca0c",
 "manifest.json": "4734db19b089f1a4d7b37fdc9824bcd2",
 "paystack_interop.js": "390f3102969d7e7f360d30e242a46a9c",
 "version.json": "d66cac2d06ac0ec2c0d30ceaa48c20b9"};
