@@ -3,14 +3,15 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "d2fa1585221859d073b1a3ccf21fd778",
-"assets/AssetManifest.bin.json": "339775e53054e1cea36d9b07e14c98b6",
-"assets/AssetManifest.json": "68f1d83b73e380443b1a20e549225cac",
+const RESOURCES = {"assets/AssetManifest.bin": "3cf7fdf8a21e8fa0cebafcf853367bfb",
+"assets/AssetManifest.bin.json": "fbf3ff7e7e9097e551cc01b36e42cc92",
+"assets/AssetManifest.json": "989afb5e2e573f55d0d1a0b474a329a5",
+"assets/assets/icons/account-tree.png": "4fd58a451b32c6d1df371484832980cd",
 "assets/assets/icons/baim.jpg": "5b9cc4882fed6ab9e063d4815c33e2e1",
 "assets/assets/icons/portal.png": "c0d13f207b229a56fff33741dda7ea37",
 "assets/assets/icons/student.png": "b5e9e9a239ebc316395e9c6e7f17ba5b",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
-"assets/fonts/MaterialIcons-Regular.otf": "140cfe3f0e482de4042d41d93eb72a3c",
+"assets/fonts/MaterialIcons-Regular.otf": "e6007b7f2b8f54a50502e4327f548d78",
 "assets/NOTICES": "24e0f61583137024eadc63e7a9d8269e",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "89ed8f4e49bcdfc0b5bfc9b24591e347",
 "assets/packages/flutter_paystack/assets/images/american_express.png": "fac1ed63030230003fa52ee8f98aa8dc",
@@ -39,9 +40,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "d2fa1585221859d073b1a3ccf21fd778
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "e84b0c190a400a75fa82e64b2cc78a95",
-"/": "e84b0c190a400a75fa82e64b2cc78a95",
-"main.dart.js": "25dcbba8a47d351560ffb3d1a942c4fa",
+"index.html": "029d3185253a6a63a82e5867b7c351b9",
+"/": "029d3185253a6a63a82e5867b7c351b9",
+"main.dart.js": "2c4242cc2f3c2886631f88836b53730d",
 "manifest.json": "4734db19b089f1a4d7b37fdc9824bcd2",
 "paystack_interop.js": "390f3102969d7e7f360d30e242a46a9c",
 "version.json": "d66cac2d06ac0ec2c0d30ceaa48c20b9"};
