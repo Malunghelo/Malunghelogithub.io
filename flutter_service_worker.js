@@ -40,9 +40,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "3cf7fdf8a21e8fa0cebafcf853367bfb
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "029d3185253a6a63a82e5867b7c351b9",
-"/": "029d3185253a6a63a82e5867b7c351b9",
-"main.dart.js": "2c4242cc2f3c2886631f88836b53730d",
+"index.html": "d71d33f0e4c7877fe3ee6f70fded73d4",
+"/": "d71d33f0e4c7877fe3ee6f70fded73d4",
+"main.dart.js": "1c08216e150fe89cec6ac90c1dcf1b92",
 "manifest.json": "4734db19b089f1a4d7b37fdc9824bcd2",
 "paystack_interop.js": "390f3102969d7e7f360d30e242a46a9c",
 "version.json": "d66cac2d06ac0ec2c0d30ceaa48c20b9"};
