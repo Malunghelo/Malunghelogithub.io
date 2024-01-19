@@ -3,16 +3,14 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "b8207d84f630acf75f7f81c12c245636",
-"assets/AssetManifest.bin.json": "3aa856949990cdfbeac71dbf5d4816e5",
-"assets/AssetManifest.json": "a13eca8060b8b534cf2fcf4cccc22aa3",
+const RESOURCES = {"assets/AssetManifest.bin": "a667a6a60e9a28759b9e4fea7fce2dd1",
+"assets/AssetManifest.bin.json": "27b3b640b6cbf2f273215c2a8a4f983d",
+"assets/AssetManifest.json": "e6c2af18a396c3b4490f3c6d79eedcc0",
 "assets/assets/fonts/AkayaTelivigala-Regular.ttf": "31533526895b179fa322a2856bbd4185",
-"assets/assets/icons/25%2525Discount.png": "e83add02bdd723586bd77b6f0a999158",
 "assets/assets/icons/account-tree.png": "4fd58a451b32c6d1df371484832980cd",
-"assets/assets/icons/form.png": "ccf5ddba503ae82e28bff6674684c358",
 "assets/FontManifest.json": "0c7f17aeba8789b94b888e22851f8be6",
 "assets/fonts/MaterialIcons-Regular.otf": "e6007b7f2b8f54a50502e4327f548d78",
-"assets/NOTICES": "22acdb4b98acd4d4e562f6b2982f9df5",
+"assets/NOTICES": "dfec08e2991ea782d724e87419f82772",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "89ed8f4e49bcdfc0b5bfc9b24591e347",
 "assets/packages/flutter_paystack/assets/images/american_express.png": "fac1ed63030230003fa52ee8f98aa8dc",
 "assets/packages/flutter_paystack/assets/images/dinners_club.png": "24450426cbb1e5b657356b6cca621956",
@@ -40,9 +38,9 @@ const RESOURCES = {"assets/AssetManifest.bin": "b8207d84f630acf75f7f81c12c245636
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/Icon-maskable-192.png": "c457ef57daa1d16f64b27b786ec2ea3c",
 "icons/Icon-maskable-512.png": "301a7604d45b3e739efc881eb04896ea",
-"index.html": "07776bb4e5c412e8fdbe0ee19f6ea348",
-"/": "07776bb4e5c412e8fdbe0ee19f6ea348",
-"main.dart.js": "a84fe755714e0255d0f6a04527445dab",
+"index.html": "21680b4c174023d13566c3b8e3c17629",
+"/": "21680b4c174023d13566c3b8e3c17629",
+"main.dart.js": "e854bd6bc00fac5809b38e2428c86bb0",
 "manifest.json": "4734db19b089f1a4d7b37fdc9824bcd2",
 "paystack_interop.js": "390f3102969d7e7f360d30e242a46a9c",
 "version.json": "d66cac2d06ac0ec2c0d30ceaa48c20b9"};
