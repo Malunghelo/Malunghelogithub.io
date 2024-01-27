@@ -98725,7 +98725,7 @@ s.P[r]=0},
 $S:0}
 A.awz.prototype={
 $0(){var s=this.a,r=s.JH()+s.JI()+s.JJ()+s.JK()+s.JL()+s.JM()
-return B.n.j((s.d==="Yes"?s.m1()+s.m2()+s.m3()+s.m4()+s.m5()+s.m6():r)*100)},
+return B.n.j(s.d==="Yes"?s.m1()+s.m2()+s.m3()+s.m4()+s.m5()+s.m6():r)},
 $S:42}
 A.awA.prototype={
 $0(){this.a.b5=!0},
