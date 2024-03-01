@@ -34287,7 +34287,7 @@ r.toString
 q.push(r)}return q},
 FR(a,b,c,d,e,f){var s=0,r=A.t(t.H)
 var $async$FR=A.n(function(g,h){if(g===1)return A.o(h,r)
-while(true)switch(s){case 0:$.b2w().DE(self.paystackPopUp("pk_test_368e65cff4a74e4511b39f8c5e255c4cddbb57b3",c,a,f,b,A.bJ(d),A.bJ(e)),[])
+while(true)switch(s){case 0:$.b2w().DE(self.paystackPopUp("pk_live_8ef4b153100191894aaa7e9ab4e9aca0c1ae7cd3",c,a,f,b,A.bJ(d),A.bJ(e)),[])
 return A.p(null,r)}})
 return A.q($async$FR,r)},
 ht(a,b,c){var s=0,r=A.t(t.y),q,p,o,n,m
