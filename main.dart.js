@@ -34622,7 +34622,7 @@ r.toString
 q.push(r)}return q},
 G2(a,b,c,d,e,f){var s=0,r=A.r(t.H)
 var $async$G2=A.n(function(g,h){if(g===1)return A.o(h,r)
-while(true)switch(s){case 0:$.b4d().E6(self.paystackPopUp("pk_test_368e65cff4a74e4511b39f8c5e255c4cddbb57b3",c,a,f,b,A.bG(d),A.bG(e)),[])
+while(true)switch(s){case 0:$.b4d().E6(self.paystackPopUp("pk_live_8ef4b153100191894aaa7e9ab4e9aca0c1ae7cd3",c,a,f,b,A.bG(d),A.bG(e)),[])
 return A.p(null,r)}})
 return A.q($async$G2,r)},
 fx(a,b,c){var s=0,r=A.r(t.y),q,p,o,n,m
