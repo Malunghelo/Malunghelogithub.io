@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Port - Specials</title>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <link rel="stylesheet" href="Screens/Widget/style.css">
+    <style>
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+        
+        body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+        padding-bottom: 50px;
+    
+        }
+        
+        header {
+        text-align: center;
+        padding: 10px 0;
+        margin-right: 17px;
+        }
+        
+        nav ul {
+        list-style: none;
+        padding: 0;
+        padding-bottom: 16px;
+        
+        }
+        
+        nav ul li {
+        display: inline-block;
+        margin-right: 20px;
+        }
+    
+        nav a {
+        text-decoration: none;
+        margin-top: 16px;
+        color: #333;
+        font-size: 16px;
+        transition: color 0.3s ease; /* Smooth transition for link color */
+    }
+    
+        
+        nav a.active:not(#logo-nav) {
+          color: #2ae6ff;
+          font-weight: normal;
+        }
+        
+        #logo-nav {
+                pointer-events: none;
+                cursor: default;
+                color: inherit;
+                text-decoration: none;
+            }
+
+            @media (max-width: 768px) {
+        /* Reset header margin */
+        header {
+            margin-right: 0;
+            padding: 10px;
+        }
+
+        /* Stack nav items vertically */
+        nav ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 0;
+        }
+
+        nav ul li {
+            display: block;
+            margin: 10px 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Make logo full width */
+        #logo-nav {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            font-size: 1.8rem;
+        }
+
+        /* Adjust signup button */
+        .signup-button {
+            margin: 15px 0 0 0;
+            width: 80%;
+        }
+    }
+
+    /* Remove conflicting margin */
+    header {
+        margin-right: 0; /* Remove the 17px right margin */
+    }
+      </style>
+    </head>
+    <body>
+        <header class="header-container">
+            <nav>
+                <ul>
+                    <li><a id="logo-nav" class="logo-text">BlueInc.</a></li>
+                    <li><a href="home.html" id="home-nav">Home</a></li>
+                    <li><a href="specials.html" id="business-nav" class="active">Specials</a></li>
+                    <li><a href="subscription.html" id="media-nav">Subscription</a></li>
+                    <li><a href="contact-us.html" id="blog-nav">Contact Us</a></li>
+                    <li><a href="reset-password-home.html" class="signup-button">Forgot Password</a></li>
+                </ul>
+            </nav>
+            <!-- Business content -->
+    <!-- Business content -->
+    <div id="business-page" class="page-content" style="text-align: center;">
+        <img src="icons/box.png" alt="No Content Available" style="width: 150px; margin: 10px auto;
+        margin-top: 100px;">
+        <p style="font-size: 18px; color: #666;">
+            No specials yet
+        </p>
+    </div>
+    </body>
+    </html>
+    

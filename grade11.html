@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="Screens/Widget/style.css" />
+   <!-- Load Firebase First -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+<!-- Paystack -->
+<script src="https://js.paystack.co/v1/inline.js"></script>
+  <title>Student Port - Learning Hubs Grade 11</title>
+  <style>
+    /* General Styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff;
+      margin: 0;
+      text-align: center;
+      color: #494949;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 10px 20px;
+      margin-bottom: 30px;
+    }
+
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #00457c;
+    }
+
+    /* Normal Prices Container */
+    .pricing-container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      max-width: 1100px;
+      margin: 0 auto 50px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .box {
+      width: 280px;
+      height: 450px;
+      background: linear-gradient(145deg, #ffffff, #e6e6e6);
+      border-radius: 15px;
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .box h3 {
+      margin: 0 0 15px;
+      font-size: 22px;
+      color: #00457c;
+    }
+
+    .box p {
+      font-size: 18px;
+      margin: 0;
+      color: #555;
+    }
+
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 6px 6px 18px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Enroll Button */
+    .enroll-btn {
+      width: 250px;
+      margin-top: 15px;
+      line-height: 1.5;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      color: white;
+      background-color: #00457c;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .enroll-btn:hover {
+      background-color: #003366;
+    }
+
+    /* Special Packages Container */
+    .special-packages-container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.15);
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      margin-bottom: 50px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .grid-box {
+      width: 300px;
+      height: 500px;
+      background: linear-gradient(145deg, #ffffff, #e6e6e6);
+      border-radius: 15px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .grid-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 7px 7px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 900px) {
+      .grid-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        flex-direction: column;
+      }
+      .grid-container {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+    .nav-container {
+      justify-content: space-between;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #ffffff;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    .nav-links li {
+      display: inline;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #00457c;
+      font-weight: normal;
+    }
+
+    .hamburger {
+      align-items: center;
+      display: none;
+      font-size: 22px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Mobile View */
+    @media (max-width: 768px) {
+      .hamburger {
+        display: block;
+        align-items: center;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        background: white;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .nav-links li {
+        margin: 10px 0;
+      }
+          .container, .grid-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .box, .grid-box {
+        max-width: 100%;
+      }
+
+
+    .pricing-container {
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .grid-container {
+      align-items: center;
+      margin: 30px;
+    }
+
+    .box {
+      width: 280px;
+      height: 450px;
+      background: linear-gradient(145deg, #ffffff, #e6e6e6);
+      border-radius: 15px;
+      box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    }
+
+
+
+    .features {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .features li {
+      margin: 5px 0;
+      font-size: 16px;
+      color: #555;
+    }
+
+    features-container {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+    }
+
+    .feature-box {
+      margin: 10px 0;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    .feature-box h3 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .feature-box p {
+      font-size: 20px;
+    }
+
+    .features-container {
+            padding: 20px;
+            border-radius: 15px;
+            color: #000;
+            text-align: start;
+        }
+
+    .grid-box p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .grid-box h3 {
+      font-size: 22px;
+      line-height: 0.8;
+      font-weight: normal;
+      margin-bottom: 20px;
+    }
+    .box h2 {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: normal;
+      color: #ff0000;
+    }
+
+    .grid-box h2 {
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: normal;
+      color: #ff0000;
+    }
+
+    .discounted-price {
+      color: #3d3d3d; /* Green for discounted price */
+      font-weight: normal;
+      font-size: 16px !important;
+      text-decoration: line-through;
+    }
+
+    .saved {
+      color: #6b6b6b; /* Orange for saved amount */
+      font-style: italic;
+      font-size: 14px !important;
+      font-weight: normal !important;
+    }
+
+    .normal-price {
+      margin-top: 10px !important;
+      color: #3494b1 !important;
+      font-size: 20px !important;
+    
+    }
+    
+
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="nav-container">
+        <a href="home.html" id="logo-nav" class="logo-text">BlueInc.</a>
+        <button class="hamburger" onclick="toggleMenu()">Select Grade</button>
+        <ul class="nav-links">
+          <li><a href="grade12.html" id="home-nav">Grade 12</a></li>
+          <li><a href="grade11.html" id="business-nav" class="active">Grade 11</a></li>
+          <li><a href="grade10.html" id="media-nav">Grade 10</a></li>
+          <li><a href="supercards.html" id="blog-nav" >Upgrading</a></li>
+          <li><a href="#" id="sign-out-btn" class="signup-button">Log Out</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <h2 class="title">Grade 11<br>FullTime<br><br>Price Per Subject</h2>
+
+  <div class="pricing-container">
+    <div class="container">
+      <div class="box">
+        <h3>Mathematics</h3>
+        <div class="pricing">
+          
+          <div class="discount">
+            <p class="discounted-price">R399/mo</p>
+            <p class="saved">Saved: R200</p>
+          </div>
+          <p class="normal-price">R199/mo</p>
+        </div>
+        <ul class="features">
+          <li>Daily Learning</li>
+          <li>Pre-recorded Lessons</li>
+          <li>Discussion Groups</li>
+          <li>Live Learning</li>
+          <li>Career Hubs</li>
+          <li>Ads Free</li>
+        </ul>
+        <button class="enroll-btn">Enroll Now<br>199</button>
+        <h2>After Enrollment go back to NOVAR app L.Hubs and start Learning</h2>
+      </div>
+      <div class="box">
+        <h3>Physical Sciences</h3>
+        <div class="pricing">
+          
+          <div class="discount">
+            <p class="discounted-price">R399/mo</p>
+            <p class="saved">Saved: R200</p>
+          </div>
+          <p class="normal-price">R199/mo</p>
+        </div>
+        <ul class="features">
+          <li>Daily Learning</li>
+          <li>Pre-recorded Lessons</li>
+          <li>Discussion Groups</li>
+          <li>Live Learning</li>
+          <li>Career Hubs</li>
+          <li>Ads Free</li>
+        </ul>
+        <button class="enroll-btn">Enroll Now<br>R199</button>
+        <h2>After Enrollment go back to NOVAR app L.Hubs and start Learning</h2>
+      </div>
+      
+    </div>
+  </div>
+  
+  
+
+  <h2 class="title">Discounted Special Packages</h2>
+
+  <div class="special-packages-container">
+    <div class="grid-container">
+      <div class="grid-box">
+        <h3>Mathematics<br>+<br>Physical Sciences</h3>
+        <div class="pricing">
+          
+          <div class="discount">
+            <p class="discounted-price">R398/mo</p>
+            <p class="saved">Saved: R98</p>
+          </div>
+          <p class="normal-price">R300/mo</p>
+        </div>
+        <div class="features-container">
+          <ul>
+            <li>Daily Learning</li>
+            <li>Pre-recorded Lessons</li>
+            <li>Discussion Groups</li>
+            <li>Live Learning</li>
+            <li>Career Hubs</li>
+            <li>Ads Free</li>
+          </ul>
+        </div>
+        <button class="enroll-btn">Enroll Now<br>R300</button>
+        <h2>After Enrollment go back to NOVAR app L.Hubs and start Learning</h2>
+      </div>
+      
+      
+  </div>
+  
+
+ 
+  <script>
+    function toggleMenu() {
+        document.querySelector(".nav-links").classList.toggle("active");
+    }
+  
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyCkeUHT5wBxr2eNlNCFqUfyhayZ7VMzjv8",
+        authDomain: "student-portal-a2284.firebaseapp.com",
+        projectId: "student-portal-a2284",
+        storageBucket: "student-portal-a2284.appspot.com",
+        messagingSenderId: "854780246625",
+        appId: "1:854780246625:web:86899fc898fa2650668820"
+    };
+  
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+  
+    const paystackPublicKey = 'pk_live_8ef4b153100191894aaa7e9ab4e9aca0c1ae7cd3';
+  
+    document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll('.enroll-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            const container = this.closest('.box, .grid-box');
+            if (!container) {
+                console.error("Error: No parent container (.box or .grid-box) found for enroll button.");
+                return;
+            }
+
+            const normalPriceElement = container.querySelector('.normal-price');
+            if (!normalPriceElement) {
+                console.error("Error: No .normal-price element found inside the container.");
+                return;
+            }
+
+            const priceText = normalPriceElement.textContent;
+            const price = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+
+            const user = firebase.auth().currentUser;
+            if (!user) {
+                alert('User not logged in.');
+                return;
+            }
+
+            const uid = user.uid;
+            const email = user.email;
+            
+            // Set timestamps for Firestore
+            const paymentDate = firebase.firestore.Timestamp.now(); 
+            const expirationDate = firebase.firestore.Timestamp.fromDate(
+                new Date(new Date().setDate(new Date().getDate() + 30))
+            );
+
+            const packageTitleElement = container.querySelector('h3');
+            if (!packageTitleElement) {
+                console.error("Error: No h3 element found inside the grid-box.");
+                return;
+            }
+
+            const packageTitle = packageTitleElement.textContent.trim();
+
+            let collections = [];
+
+            if (packageTitle.includes("Mathematics") && packageTitle.includes("Physical Sciences")) {
+                collections = ["paymentOCG11MathsAbove50", "paymentOCG11PhysAbove50"];
+            }  else if (packageTitle.includes("Mathematics")) {
+                collections = ["paymentOCG11MathsAbove50"];
+            } else if (packageTitle.includes("Physical Sciences")) {
+                collections = ["paymentOCG11PhysAbove50"];
+            }  else {
+                console.error("Error: Unknown package title.");
+                return;
+            }
+
+            const handler = PaystackPop.setup({
+                key: paystackPublicKey,
+                email: email,
+                amount: price * 100,
+                currency: 'ZAR',
+                ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+                callback: function (response) {
+                    showLoadingDialog(); // Show loading before database update
+
+                    let updatePromises = collections.map(collection => {
+                        return db.collection(collection).doc(uid).set({
+                            uid: uid,
+                            email: email,
+                            package: packageTitle,
+                            paymentDate: paymentDate,
+                            expirationDate: expirationDate,
+                            paid: true
+                        }).then(() => {
+                            console.log(`Saved to ${collection}`);
+                        }).catch(error => {
+                            console.error(`Error saving to ${collection}:`, error);
+                            showErrorDialog("Error updating database. Please contact support.");
+                        });
+                    });
+
+                    Promise.all(updatePromises).then(() => {
+                        hideLoadingDialog();
+                        showSuccessDialog("Payment successful! Your access has been granted. Go back to NOVAR app and tap L.Hubs icon to Start Learning.");
+                    }).catch(() => {
+                        hideLoadingDialog();
+                        showErrorDialog("An error occurred while processing your request.");
+                    });
+                },
+                onClose: function () {
+                    alert('Payment window closed.');
+                }
+            });
+
+            handler.openIframe();
+        });
+    });
+
+    const signOutBtn = document.getElementById("sign-out-btn");
+
+        if (signOutBtn) {
+            signOutBtn.addEventListener("click", function (event) {
+                event.preventDefault(); // Prevent default link behavior
+
+                firebase.auth().signOut().then(() => {
+                  // Prevent navigating back after logout
+                  history.pushState(null, null, location.href);
+                  window.onpopstate = function () {
+                      history.go(1);
+                  };
+
+                  // Redirect to login page
+                  window.location.replace("home.html");
+              }).catch((error) => {
+                  console.error("Sign out error:", error);
+              });
+            });
+        }
+});
+
+// Function to show loading dialog
+function showLoadingDialog() {
+    let loadingDiv = document.createElement("div");
+    loadingDiv.id = "loadingDialog";
+    loadingDiv.style.position = "fixed";
+    loadingDiv.style.top = "50%";
+    loadingDiv.style.left = "50%";
+    loadingDiv.style.transform = "translate(-50%, -50%)";
+    loadingDiv.style.background = "rgba(0, 0, 0, 0.8)";
+    loadingDiv.style.color = "white";
+    loadingDiv.style.padding = "20px";
+    loadingDiv.style.borderRadius = "10px";
+    loadingDiv.style.zIndex = "9999";
+    loadingDiv.innerHTML = "<p>Processing your payment, please wait...</p>";
+    document.body.appendChild(loadingDiv);
+}
+
+// Function to hide loading dialog
+function hideLoadingDialog() {
+    let loadingDiv = document.getElementById("loadingDialog");
+    if (loadingDiv) {
+        loadingDiv.remove();
+    }
+}
+
+// Function to show success dialog
+function showSuccessDialog(message) {
+    alert(message);
+}
+
+// Function to show error dialog
+function showErrorDialog(message) {
+    alert(message);
+}
+
+  </script>
+  
+
+
+</body>
+</html>
