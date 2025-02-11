@@ -531,11 +531,11 @@ document.querySelector('.next-step').addEventListener('click', () => {
                 Total Cost: R${formData.amount}
             `.trim();
 
-            const whatsappURL = `https://wa.me/27634888362?text=${encodeURIComponent(whatsappMessage)}`;
+            const whatsappURL = `https://wa.me/27781271344?text=${encodeURIComponent(whatsappMessage)}`;
 
             // Initialize Paystack Payment
             const handler = PaystackPop.setup({
-                key: 'pk_test_368e65cff4a74e4511b39f8c5e255c4cddbb57b3',
+                key: 'pk_live_8ef4b153100191894aaa7e9ab4e9aca0c1ae7cd3',
                 email: formData.email,
                 amount: formData.amount * 100, // Convert to cents
                 currency: 'ZAR',
