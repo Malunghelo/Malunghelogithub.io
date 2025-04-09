@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,3 +74,80 @@
   </header>
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="Screens/Widget/style.css" />
+  <title>Join Learning Hubs</title>
+  <script type="module">
+    // Import Firebase SDK modules
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCkeUHT5wBxr2eNlNCFqUfyhayZ7VMzjv8",
+      authDomain: "student-portal-a2284.firebaseapp.com",
+      projectId: "student-portal-a2284",
+      storageBucket: "student-portal-a2284.appspot.com",
+      messagingSenderId: "854780246625",
+      appId: "1:854780246625:web:86899fc898fa2650668820"
+    };
+
+    // Initialize Firebase app
+    const app = initializeApp(firebaseConfig);
+
+    // Get the Auth instance
+    const auth = getAuth(app);
+
+    // Sign out functionality
+    document.addEventListener("DOMContentLoaded", function () {
+      const signOutButton = document.getElementById("sign-out-btn");
+
+      signOutButton.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default anchor behavior
+        signOut(auth)
+          .then(() => {
+            // Sign-out successful; redirect to home.html
+            window.location.href = "home.html";
+          })
+          .catch((error) => {
+            // Handle any errors during sign-out
+            console.error("Sign out error:", error.message);
+          });
+      });
+    });
+  </script>
+</head>
+<body>
+  <header class="header-container">
+    <nav>
+      <ul>
+        <li>
+          <a href="home.html" id="logo-nav" class="logo-text active">BlueInc.</a>
+        </li>
+        <li>
+          <a href="grade12.html" id="home-nav" >Grade 12</a>
+        </li>
+        <li>
+          <a href="grade11.html" id="business-nav">Grade 11</a>
+        </li>
+        <li>
+          <a href="grade10.html" id="media-nav">Grade 10</a>
+        </li>
+        <li>
+          <a href="supercards.html" id="blog-nav">Upgrading</a>
+        </li>
+        <!-- Updated the logout link to have an id and use href="#" -->
+        <li>
+          <a href="#" id="sign-out-btn" class="signup-button">Log Out</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+</body>
+</html>
+>>>>>>> 30924e6 (first commit)
