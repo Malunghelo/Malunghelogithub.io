@@ -1,19 +1,52 @@
+const admin = require("firebase-admin");
+const {onSchedule} = require("firebase-functions/v2/scheduler");
+
+admin.initializeApp();
+const db = admin.firestore();
+
 /**
- * Import function triggers from their respective submodules:
+ * Helper function to check expiration date and update the 'paid' field.
  *
- * const {onCall} = require("firebase-functions/v2/https");
- * const {onDocumentWritten} = require("firebase-functions/v2/firestore");
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
+ * @param {string} collectionName - The Firestore collection name.
  */
+async function checkExpiredPayments(collectionName) {
+  const snapshot = await db.collection(collectionName).get();
+  const now = admin.firestore.Timestamp.now();
 
-const {onRequest} = require("firebase-functions/v2/https");
-const logger = require("firebase-functions/logger");
+  // Add 2 hours to compensate for UTC+2
+  const adjustedNow = new Date(now.toDate().getTime() + (2 * 60 * 60 * 1000));
+  const adjustedNowTimestamp = admin.firestore.Timestamp.fromDate(adjustedNow);
 
-// Create and deploy your first functions
-// https://firebase.google.com/docs/functions/get-started
+  const updates = snapshot.docs.map(async (doc) => {
+    const data = doc.data();
+    if (data.expirationDate && data.expirationDate < adjustedNowTimestamp) {
+      await doc.ref.update({paid: false});
+      console.log(`Updated ${doc.id} in ${collectionName}: paid = false`);
+    }
+  });
 
-// exports.helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+  return Promise.all(updates);
+}
+
+// Scheduled function using v2 API
+exports.checkExpiredLhubsPayments = onSchedule(
+    {schedule: "every 24 hours", timeZone: "Africa/Johannesburg"},
+    async (event) => {
+      console.log("Running scheduled payment check...");
+      await checkExpiredPayments("paymentOCG10MathsAbove50");
+      await checkExpiredPayments("paymentOCG10PhysAbove50");
+
+      await checkExpiredPayments("paymentOCG11MathsAbove50");
+      await checkExpiredPayments("paymentOCG11PhysAbove50");
+
+      await checkExpiredPayments("paymentOCG12LifesAbove50");
+      await checkExpiredPayments("paymentOCG12LifesUpgrading");
+
+      await checkExpiredPayments("paymentOCG12MathsAbove50");
+      await checkExpiredPayments("paymentOCG12MathsUpgrading");
+
+      await checkExpiredPayments("paymentOCG12PhysAbove50");
+      await checkExpiredPayments("paymentOCG12PhysUpgrading");
+
+      console.log("Finished checking payment statuses.");
+    });
