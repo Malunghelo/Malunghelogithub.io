@@ -1,52 +1,73 @@
+const {onDocumentCreated} = require("firebase-functions/v2/firestore");
 const admin = require("firebase-admin");
-const {onSchedule} = require("firebase-functions/v2/scheduler");
 
 admin.initializeApp();
-const db = admin.firestore();
 
-/**
- * Helper function to check expiration date and update the 'paid' field.
- *
- * @param {string} collectionName - The Firestore collection name.
- */
-async function checkExpiredPayments(collectionName) {
-  const snapshot = await db.collection(collectionName).get();
-  const now = admin.firestore.Timestamp.now();
-
-  // Add 2 hours to compensate for UTC+2
-  const adjustedNow = new Date(now.toDate().getTime() + (2 * 60 * 60 * 1000));
-  const adjustedNowTimestamp = admin.firestore.Timestamp.fromDate(adjustedNow);
-
-  const updates = snapshot.docs.map(async (doc) => {
-    const data = doc.data();
-    if (data.expirationDate && data.expirationDate < adjustedNowTimestamp) {
-      await doc.ref.update({paid: false});
-      console.log(`Updated ${doc.id} in ${collectionName}: paid = false`);
-    }
-  });
-
-  return Promise.all(updates);
-}
-
-// Scheduled function using v2 API
-exports.checkExpiredLhubsPayments = onSchedule(
-    {schedule: "every 24 hours", timeZone: "Africa/Johannesburg"},
+exports.sendFeedNotification = onDocumentCreated(
+    "notification_requests/{requestId}",
     async (event) => {
-      console.log("Running scheduled payment check...");
-      await checkExpiredPayments("paymentOCG10MathsAbove50");
-      await checkExpiredPayments("paymentOCG10PhysAbove50");
+      const notificationData = event.data.data();
 
-      await checkExpiredPayments("paymentOCG11MathsAbove50");
-      await checkExpiredPayments("paymentOCG11PhysAbove50");
+      try {
+        // Prepare the notification message
+        const message = {
+          notification: {
+            title: `${notificationData.senderUsername}`,
+            body: notificationData.description.length > 50 ?
+                        `${notificationData.description.substring(0, 50)}...` :
+                        notificationData.description,
+          },
+          data: {
+            type: "new_feed",
+            senderId: notificationData.senderId,
+            senderUsername: notificationData.senderUsername,
+            province: notificationData.province,
+            click_action: "FLUTTER_NOTIFICATION_CLICK",
+          },
+          topic: "all_users",
+        };
 
-      await checkExpiredPayments("paymentOCG12LifesAbove50");
-      await checkExpiredPayments("paymentOCG12LifesUpgrading");
+        // Send the notification
+        await admin.messaging().send(message);
 
-      await checkExpiredPayments("paymentOCG12MathsAbove50");
-      await checkExpiredPayments("paymentOCG12MathsUpgrading");
+        // Update the request status
+        await event.data.ref.update({
+          status: "completed",
+          completedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
 
-      await checkExpiredPayments("paymentOCG12PhysAbove50");
-      await checkExpiredPayments("paymentOCG12PhysUpgrading");
+        // Log successful delivery
+        await admin.firestore().collection("notification_logs").add({
+          type: "feed_upload",
+          sender_id: notificationData.senderId,
+          sender_username: notificationData.senderUsername,
+          notification_data: notificationData,
+          timestamp: admin.firestore.FieldValue.serverTimestamp(),
+          status: "delivered",
+        });
 
-      console.log("Finished checking payment statuses.");
+        return null;
+      } catch (error) {
+        console.error("Error sending notification:", error);
+
+        // Update the request status
+        await event.data.ref.update({
+          status: "failed",
+          error: error.message,
+          failedAt: admin.firestore.FieldValue.serverTimestamp(),
+        });
+
+        // Log failed delivery
+        await admin.firestore().collection("notification_logs").add({
+          type: "feed_upload",
+          sender_id: notificationData.senderId,
+          sender_username: notificationData.senderUsername,
+          notification_data: notificationData,
+          timestamp: admin.firestore.FieldValue.serverTimestamp(),
+          status: "failed",
+          error: error.message,
+        });
+
+        return null;
+      }
     });
